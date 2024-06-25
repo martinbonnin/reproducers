@@ -8,4 +8,6 @@ version = "0.0.1"
 
 kotlin {
     jvm()
+    // Uncomment to fix the issue
+    //macosArm64()
 }
