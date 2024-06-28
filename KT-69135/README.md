@@ -1,0 +1,1 @@
+Open the app folder in IntelliJ
