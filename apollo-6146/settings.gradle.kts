@@ -4,5 +4,3 @@ pluginManagement {
     it.google()
   }
 }
-
-includeBuild("../../apollo-kotlin")
