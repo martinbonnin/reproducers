@@ -30,7 +30,7 @@ val generateSourceTaskProvider = tasks.register("generateSource", GenerateSource
   outputDir.set(file("build/generated-source"))
 }
 
-project.kotlin.sourceSets.getByName("main").kotlin.srcDirs(generateSourceTaskProvider)
+project.kotlin.sourceSets.getByName("main").kotlin.srcDir(generateSourceTaskProvider)
 
 android {
   namespace = "com.example"
