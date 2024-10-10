@@ -1,0 +1,12 @@
+type Query {
+    info: info
+    Info: Info
+}
+
+type info {
+    foo: String
+}
+
+type Info {
+    foo: String
+}
