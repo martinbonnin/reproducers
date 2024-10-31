@@ -18,4 +18,4 @@ A problem occurred configuring project ':app'.
 > java.lang.IllegalStateException: No dependencies were found for property property 'all'
 ```
 
-Go [here](https://github.com/martinbonnin/reproducers/blob/24780220dc52b4dbe77d7f43b140f6f8dd8cfc4a/TestSrcDir/app/build.gradle.kts#L83) and set the condition to false to use the other branch to make the test pass.
+Go [here](https://github.com/martinbonnin/reproducers/blob/f4b787db1a3fadc5c3a4d740e936f0e7412cf8bf/TestSrcDir/app/build.gradle.kts#L83) and set the condition to false to use the other branch to make the test pass.
