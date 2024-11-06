@@ -1,0 +1,22 @@
+# This is a Gradle generated file for dependency locking.
+# Manual edits can break the build and are not advised.
+# This file is expected to be part of source control.
+com.apollographql.apollo:apollo-annotations-jvm:4.1.0=resolvable
+com.apollographql.apollo:apollo-annotations:4.1.0=resolvable
+com.apollographql.apollo:apollo-ast-jvm:4.1.0=resolvable
+com.apollographql.apollo:apollo-ast:4.1.0=resolvable
+com.apollographql.apollo:apollo-compiler:4.1.0=resolvable
+com.squareup.okio:okio-jvm:3.9.0=resolvable
+com.squareup.okio:okio:3.9.0=resolvable
+com.squareup:javapoet:1.13.0=resolvable
+com.squareup:kotlinpoet-jvm:2.0.0=resolvable
+com.squareup:kotlinpoet:2.0.0=resolvable
+org.jetbrains.kotlin:kotlin-stdlib-common:2.0.10=resolvable
+org.jetbrains.kotlin:kotlin-stdlib:2.0.10=resolvable
+org.jetbrains.kotlinx:kotlinx-serialization-bom:1.6.2=resolvable
+org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.6.2=resolvable
+org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.2=resolvable
+org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.6.2=resolvable
+org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2=resolvable
+org.jetbrains:annotations:13.0=resolvable
+empty=
