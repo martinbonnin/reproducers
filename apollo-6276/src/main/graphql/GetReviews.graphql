@@ -1,0 +1,6 @@
+query GetReviews {
+    products {
+        id
+        reviews
+    }
+}

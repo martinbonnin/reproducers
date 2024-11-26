@@ -1,0 +1,15 @@
+"""A product!"""
+type Product {
+  id: ID!
+  name: String!
+  price: Int!
+  reviews: [String!]!
+}
+
+type Query {
+  products: [Product!]!
+}
+
+type Subscription {
+  reviews: String!
+}
