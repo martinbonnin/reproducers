@@ -1,3 +1,4 @@
+import com.apollographql.execution.InMemoryPersistedDocumentCache
 import com.apollographql.execution.annotation.GraphQLQuery
 import com.apollographql.execution.annotation.GraphQLSubscription
 import com.apollographql.execution.ktor.apolloModule
@@ -32,7 +33,9 @@ class Subscription {
 fun startServer(): EmbeddedServer<NettyApplicationEngine, NettyApplicationEngine.Configuration> {
   return embeddedServer(Netty, port = 8080) {
     // /graphql route
-    val executableSchema = ServiceExecutableSchemaBuilder().build()
+    val executableSchema = ServiceExecutableSchemaBuilder()
+      .persistedDocumentCache(InMemoryPersistedDocumentCache())
+      .build()
     apolloModule(executableSchema)
     apolloSubscriptionModule(executableSchema)
   }.start()
