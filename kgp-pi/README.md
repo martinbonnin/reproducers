@@ -6,7 +6,7 @@ To reproduce:
 ``` 
 * git clone https://github.com/martinbonnin/reproducers
 * cd reproducers/kgp-pi
-* git checkout f173193699b6b5fa1ec9c97072e282c5e620fcac
+* git checkout f82b58b
 * ./gradlew test
 ```
 
