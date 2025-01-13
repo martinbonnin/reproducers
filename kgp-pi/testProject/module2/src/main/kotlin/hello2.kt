@@ -1,0 +1,1 @@
+val hello2 = "world2!!"
