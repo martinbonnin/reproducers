@@ -1,5 +1,5 @@
 
-Reproducer for an isolated projects issue.
+Reproducer for https://youtrack.jetbrains.com/issue/KT-74394/KGP-isolated-projects-Something-has-been-appended-to-this-collector-already
 
 To reproduce:
 
