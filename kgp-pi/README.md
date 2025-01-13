@@ -4,10 +4,10 @@ Reproducer for https://youtrack.jetbrains.com/issue/KT-74394/KGP-isolated-projec
 To reproduce:
 
 ``` 
-* git clone https://github.com/martinbonnin/reproducers
-* cd reproducers/kgp-pi
-* git checkout f82b58b
-* ./gradlew test
+git clone https://github.com/martinbonnin/reproducers
+cd reproducers/kgp-pi
+git checkout f82b58b
+./gradlew test
 ```
 
 Output:
