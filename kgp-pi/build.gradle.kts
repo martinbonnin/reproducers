@@ -7,3 +7,7 @@ dependencies {
   testImplementation(gradleTestKit())
   testImplementation(kotlin("test"))
 }
+
+tasks.withType(Test::class.java) {
+  inputs.files(fileTree("testProject")).withPathSensitivity(PathSensitivity.RELATIVE).withPropertyName("testProjectFiles")
+}

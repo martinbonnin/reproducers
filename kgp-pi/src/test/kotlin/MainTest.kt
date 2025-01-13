@@ -13,7 +13,7 @@ class MainTest {
 
       println("iteration $it")
       GradleRunner.create()
-        .withArguments("build")
+        .withArguments("build", "--stacktrace")
         .withProjectDir(out)
         .build()
     }
