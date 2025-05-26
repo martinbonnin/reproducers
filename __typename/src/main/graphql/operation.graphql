@@ -1,0 +1,4 @@
+query GetFoo {
+    __typename: foo
+    __typename
+}
