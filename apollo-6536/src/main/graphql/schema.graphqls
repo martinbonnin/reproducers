@@ -1,0 +1,9 @@
+type Query {
+    foo: Int
+}
+
+type Subscription {
+    field(arg: UUID!): Int
+}
+
+scalar UUID
