@@ -10,7 +10,9 @@ kotlin {
   sourceSets {
     getByName("commonMain") {
       dependencies {
+//        implementation("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
         implementation("io.ktor:ktor-client-core:3.1.3")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
       }
     }
   }
