@@ -1,0 +1,9 @@
+type Query {
+    objects: [Object!]!
+}
+
+type Object @typePolicy(keyFields: "id"){
+    id: ID!
+    name: String!
+}
+
