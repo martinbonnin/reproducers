@@ -35,5 +35,5 @@ type ConcreteObject2 implements Object & HasOtherTraits {
     ): OtherTraitReturn
 }
 
-#extend interface Object @typePolicy(keyFields: "id")
+extend interface Object @typePolicy(keyFields: "id")
 

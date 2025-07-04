@@ -49,21 +49,24 @@ class MainTest {
             {
              "data": { "objects": [] }
             }
-          """.trimIndent())
+          """.trimIndent()
+          )
           mockServer.enqueue(
             // language=json
             """
             {
-             "data": { "objects": [{"__typename": "ConcreteObject1", "id": "42", "name": "foo"}] }
+             "data": { "objects": [{"__typename": "ConcreteObject1", "id": "42", "name": "foo", "model": "model42"}] }
             }
-          """.trimIndent())
-            mockServer.enqueue(
-                // language=json
-                """
+          """.trimIndent()
+          )
+          mockServer.enqueue(
+            // language=json
+            """
             {
-             "data": { "objects": [{"__typename": "ConcreteObject1", "id": "42", "name": "foo"}, {"__typename": "ConcreteObject2", "id": "43", "name": "foo2", "model":  "some"}] }
+             "data": { "objects": [{"__typename": "ConcreteObject1", "id": "42", "name": "foo", "model": "model42"}, {"__typename": "ConcreteObject2", "id": "43", "name": "foo2", "model":  "some"}] }
             }
-          """.trimIndent())
+          """.trimIndent()
+          )
           launch {
             apolloClient.query(GetObjectsQuery())
               .watch()
@@ -78,11 +81,11 @@ class MainTest {
             .fetchPolicy(FetchPolicy.NetworkOnly)
             .execute()
 
-            delay(1.seconds)
-            println("updating the cache from the network a second time...")
-            apolloClient.query(GetObjectsQuery())
-                .fetchPolicy(FetchPolicy.NetworkOnly)
-                .execute()
+          delay(1.seconds)
+          println("updating the cache from the network a second time...")
+          apolloClient.query(GetObjectsQuery())
+            .fetchPolicy(FetchPolicy.NetworkOnly)
+            .execute()
 
         }
       mockServer.stop()
@@ -91,44 +94,47 @@ class MainTest {
 }
 
 private class CacheMissLoggingInterceptor(private val log: (ApolloRequest<*>, String) -> Unit) :
-    ApolloInterceptor {
-    override fun <D : Operation.Data> intercept(request: ApolloRequest<D>, chain: ApolloInterceptorChain): Flow<ApolloResponse<D>> = chain.proceed(request).onEach { response ->
-        response.cacheInfo?.cacheMissException?.message?.let { message ->
-            log(request, message)
-        }
-    }.catch { throwable ->
-        if (throwable is CacheMissException) {
-            log(request, throwable.message.toString())
-        }
-        throw throwable
+  ApolloInterceptor {
+  override fun <D : Operation.Data> intercept(
+    request: ApolloRequest<D>,
+    chain: ApolloInterceptorChain
+  ): Flow<ApolloResponse<D>> = chain.proceed(request).onEach { response ->
+    response.cacheInfo?.cacheMissException?.message?.let { message ->
+      log(request, message)
     }
+  }.catch { throwable ->
+    if (throwable is CacheMissException) {
+      log(request, throwable.message.toString())
+    }
+    throw throwable
+  }
 }
 
 private fun ApolloClient.Builder.logCacheMisses(
-    log: (ApolloRequest<*>, String) -> Unit,
+  log: (ApolloRequest<*>, String) -> Unit,
 ): ApolloClient.Builder = addInterceptor(CacheMissLoggingInterceptor(log))
 
 @OptIn(ApolloExperimental::class)
 fun ApolloClient.Builder.configureNormalizedCache(): ApolloClient.Builder = logCacheMisses { request, message ->
-    println("Cache miss for request ${request.operation}: $message.")
+  println("Cache miss for request ${request.operation}: $message.")
 }
-    .store(
-        store = ApolloStore,
-        writeToCacheAsynchronously = false,
-    )
-    .fetchPolicyInterceptor(NetworkOnlyInterceptor)
-    .refetchPolicyInterceptor(CacheOnlyInterceptor)
-    .also {
-        apolloExceptionHandler = { exception ->
-            println("Apollo exception: $exception")
-        }
+  .store(
+    store = ApolloStore,
+    writeToCacheAsynchronously = false,
+  )
+  .fetchPolicyInterceptor(NetworkOnlyInterceptor)
+  .refetchPolicyInterceptor(CacheOnlyInterceptor)
+  .also {
+    apolloExceptionHandler = { exception ->
+      println("Apollo exception: $exception")
     }
+  }
 
 val sqlNormalizedCacheFactory = SqlNormalizedCacheFactory()
 
 private val ApolloStore: ApolloStore = ApolloStore(
-    normalizedCacheFactory = sqlNormalizedCacheFactory,
-    cacheKeyGenerator = TypePolicyCacheKeyGenerator,
-    cacheResolver = FieldPolicyCacheResolver,
+  normalizedCacheFactory = sqlNormalizedCacheFactory,
+  cacheKeyGenerator = TypePolicyCacheKeyGenerator,
+  cacheResolver = FieldPolicyCacheResolver,
 )
 
