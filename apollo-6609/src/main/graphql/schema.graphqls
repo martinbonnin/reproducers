@@ -2,8 +2,38 @@ type Query {
     objects: [Object!]!
 }
 
-type Object @typePolicy(keyFields: "id"){
+interface Object {
     id: ID!
     name: String!
 }
+
+interface HasOtherTraits {
+    otherTrait(
+        before: String
+    ): OtherTraitReturn
+}
+
+type OtherTraitReturn {
+    info: String
+}
+
+type ConcreteObject1 implements Object & HasOtherTraits {
+    id: ID!
+    name: String!
+    model: String!
+    otherTrait(
+        before: String
+    ): OtherTraitReturn
+}
+
+type ConcreteObject2 implements Object & HasOtherTraits {
+    id: ID!
+    name: String!
+    make: String!
+    otherTrait(
+        before: String
+    ): OtherTraitReturn
+}
+
+#extend interface Object @typePolicy(keyFields: "id")
 

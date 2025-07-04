@@ -3,5 +3,8 @@ query GetObjects {
         __typename
         id
         name
+        ... on ConcreteObject1 {
+            model
+        }
     }
 }

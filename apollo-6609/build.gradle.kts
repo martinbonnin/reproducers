@@ -7,11 +7,13 @@ apollo {
   service("service") {
     packageName.set("example.com")
   }
+  linkSqlite.set(true)
 }
 
 dependencies {
   implementation("com.apollographql.apollo3:apollo-runtime")
-  implementation("com.apollographql.apollo3:apollo-normalized-cache")
+  //implementation("com.apollographql.apollo3:apollo-normalized-cache")
+  implementation("com.apollographql.apollo3:apollo-normalized-cache-sqlite")
   implementation("com.apollographql.apollo3:apollo-mockserver")
 
   testImplementation(kotlin("test"))
