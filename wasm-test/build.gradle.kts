@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
+import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 
 plugins {
   id("org.jetbrains.kotlin.multiplatform").version("2.2.0")
@@ -24,3 +25,4 @@ kotlin {
   }
   coreLibrariesVersion = "2.0.0"
 }
+

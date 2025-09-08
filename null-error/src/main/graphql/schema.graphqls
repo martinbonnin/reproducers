@@ -1,0 +1,15 @@
+extend schema @link(
+    url: "https://specs.apollo.dev/nullability/v0.4",
+    # Note: other directives are needed later on and added here for convenience
+    import: ["@semanticNonNull", "@semanticNonNullField", "@catch", "CatchTo", "@catchByDefault"]
+)
+
+extend schema @catchByDefault(to: NULL)
+
+type Query {
+    foo: Foo!
+}
+
+type Foo {
+    bar: Int!
+}
