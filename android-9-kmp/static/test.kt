@@ -1,0 +1,1 @@
+this file should trigger a compile error but doesn't
