@@ -8,11 +8,12 @@ kotlin {
   android {
     compileSdk = 36
     namespace = "com.example"
+    withJava()
   }
 }
 
 androidComponents {
   onVariants(selector().all()) {
-    it.sources.kotlin!!.addStaticSourceDirectory("static")
+    it.sources.java!!.addStaticSourceDirectory("static")
   }
 }
