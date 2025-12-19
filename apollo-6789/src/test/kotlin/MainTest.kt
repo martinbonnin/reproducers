@@ -13,7 +13,7 @@ class MainTest {
         .dataOrThrow()
         .foo
         .bar
-        ?.id // bar is @catch(to: THROW) filed but this bar is nullable
+        .id // bar is @catch(to: THROW) and bar is non-null
     }
   }
 }
