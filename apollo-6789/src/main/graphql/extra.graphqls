@@ -1,0 +1,9 @@
+extend schema @link(
+    url: "https://specs.apollo.dev/nullability/v0.4",
+    import: ["@semanticNonNull", "@semanticNonNullField", "@catch", "CatchTo", "@catchByDefault"]
+)
+# Applying a default catch strategy for completeness, though not strictly required for this specific issue.
+extend schema @catchByDefault(to: NULL)
+
+# Attempt to make the schema-nullable field 'bar' semantically non-null
+extend type Foo @semanticNonNullField(name: "bar")

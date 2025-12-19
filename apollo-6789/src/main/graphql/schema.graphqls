@@ -1,0 +1,17 @@
+schema {
+    query: Query
+}
+
+type Query {
+    foo: Foo!
+}
+
+type Foo {
+    id: ID!
+    bar: Bar # Nullable in the schema
+}
+
+type Bar {
+    id: ID!
+}
+

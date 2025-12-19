@@ -1,0 +1,8 @@
+query ExampleQuery {
+    foo {
+        id
+        bar @catch(to: THROW) {
+            id
+        }
+    }
+}
