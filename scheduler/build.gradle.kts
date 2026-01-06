@@ -11,7 +11,8 @@ apollo {
 
 dependencies {
   implementation("com.apollographql.apollo:apollo-runtime")
-  implementation("com.apollographql.mockserver:apollo-mockserver:0.3.1")
+  testImplementation("io.ktor:ktor-server-core:3.3.3")
+  testImplementation("io.ktor:ktor-server-cio:3.3.3")
   testImplementation(kotlin("test"))
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
 }

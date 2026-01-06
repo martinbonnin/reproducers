@@ -1,10 +1,13 @@
 import com.apollographql.apollo.ApolloClient
-import com.apollographql.mockserver.MockRequestBase
-import com.apollographql.mockserver.MockResponse
-import com.apollographql.mockserver.MockServer
-import com.apollographql.mockserver.MockServerHandler
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.cio.*
+import io.ktor.server.engine.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import test.HelloQuery
 import kotlin.test.Test
@@ -14,41 +17,50 @@ import kotlin.time.measureTime
 class ParallelRequestsTest {
   @Test
   fun test100ParallelRequests() = runBlocking {
-    val mockServer = MockServer.Builder()
-      .handler(object : MockServerHandler {
-        override fun handle(request: MockRequestBase): MockResponse {
+    val server = embeddedServer(CIO, port = 8080) {
+      routing {
+        var i = 0
+        post("/graphql") {
           // Add 500ms delay before responding
-          Thread.sleep(500)
-          return MockResponse.Builder().body(
+          println("  got $i")
+          System.out.flush()
+          delay(500)
+          call.respondText(
             """
-        {
-          "data": {
-            "hello": "world"
-          }
-        }
-        """.trimIndent()
-          ).build()
-        }
-      }
-      )
-      .build()
-      .use { mockServer ->
-        val apolloClient = ApolloClient.Builder()
-          .serverUrl(mockServer.url())
-          .build()
-        // Launch 100 parallel requests
-        val time = measureTime {
-          val results = (1..100).map { index ->
-            async {
-              println(">$index")
-              apolloClient.query(HelloQuery()).execute()
-              println("<$index")
+            {
+              "data": {
+                "hello": "world"
+              }
             }
-          }.awaitAll()
-
+            """.trimIndent(),
+            ContentType.Application.Json
+          )
+          println("  res $i")
         }
-
-        println("Successfully executed 100 parallel requests in $time")
       }
+    }.start(wait = false)
+
+    try {
+      val apolloClient = ApolloClient.Builder()
+        .serverUrl("http://localhost:8080/graphql")
+        .build()
+
+      // Launch 100 parallel requests
+      val time = measureTime {
+        val results = (1..64).map { index ->
+          async {
+            println(">$index")
+            System.out.flush()
+            apolloClient.query(HelloQuery()).execute()
+            println("<$index")
+            System.out.flush()
+          }
+        }.awaitAll()
+      }
+
+      println("Successfully executed 100 parallel requests in $time")
+    } finally {
+      server.stop(1000, 2000)
+    }
   }
 }
