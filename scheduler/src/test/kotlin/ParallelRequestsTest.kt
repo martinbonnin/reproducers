@@ -38,9 +38,11 @@ class ParallelRequestsTest {
           .build()
         // Launch 100 parallel requests
         val time = measureTime {
-          val results = (1..100).map {
+          val results = (1..100).map { index ->
             async {
+              println(">$index")
               apolloClient.query(HelloQuery()).execute()
+              println("<$index")
             }
           }.awaitAll()
 
