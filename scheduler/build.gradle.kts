@@ -17,6 +17,7 @@ application {
 
 dependencies {
   implementation("com.apollographql.apollo:apollo-runtime")
+  implementation("com.apollographql.apollo:apollo-normalized-cache")
   implementation("org.jetbrains.kotlinx:atomicfu:0.29.0")
   implementation("io.ktor:ktor-server-core:3.3.3")
   implementation("io.ktor:ktor-server-cio:3.3.3")
