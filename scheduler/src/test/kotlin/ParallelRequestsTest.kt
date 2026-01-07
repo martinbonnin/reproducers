@@ -19,6 +19,7 @@ class ParallelRequestsTest {
     fun test100ParallelRequests() = runBlocking {
         val apolloClient = ApolloClient.Builder()
             .dispatcher(Dispatchers.IO)
+            .normalizedCache(MemoryCacheFactory())
             .serverUrl("http://localhost:8080/graphql")
             .build()
 
