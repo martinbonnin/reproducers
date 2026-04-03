@@ -1,0 +1,3 @@
+query GetFoo($withDetails: Boolean!) {
+  foo @include(if: $withDetails)
+}
