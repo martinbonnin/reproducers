@@ -9,5 +9,6 @@ kotlin {
 //    languageVersion.set()
     @Suppress("DEPRECATION")
     languageVersion.set(KotlinVersion.KOTLIN_1_9)
+    allWarningsAsErrors.set(true)
   }
 }
