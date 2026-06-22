@@ -1,0 +1,5 @@
+query GetItem {
+  item {
+    id @catch(to: THROW)
+  }
+}

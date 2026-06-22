@@ -1,0 +1,17 @@
+type Query {
+  item: Item
+}
+
+type Item {
+  id: String
+}
+
+extend schema @link(
+  url: "https://specs.apollo.dev/nullability/v0.4",
+  import: ["@semanticNonNull", "@semanticNonNullField", "@catch", "CatchTo", "@catchByDefault"]
+)
+
+extend schema @catchByDefault(to: NULL)
+
+extend type Item
+    @semanticNonNullField(name: "id")
